@@ -29,9 +29,9 @@ public class NovoClickServiceTest {
 		ServiceResult serviceResult=	_novoClickService.novo("", null, 0F);
 		
 		assertTrue( serviceResult.existeErro());
-		assertTrue( serviceResult.contemMsg(NovoClickService.MSG_AD_ID_N_INFORMADO));
-		assertTrue( serviceResult.contemMsg(NovoClickService.MSG_ACCOUNT_ID_N_INFORMADO));
-		assertTrue( serviceResult.contemMsg(NovoClickService.MSG_CPC_INVALIDO));
+		assertTrue( serviceResult.contemMsg(INovoClickService.MSG_AD_ID_N_INFORMADO));
+		assertTrue( serviceResult.contemMsg(INovoClickService.MSG_ACCOUNT_ID_N_INFORMADO));
+		assertTrue( serviceResult.contemMsg(INovoClickService.MSG_CPC_INVALIDO));
 		 
 	}
 }

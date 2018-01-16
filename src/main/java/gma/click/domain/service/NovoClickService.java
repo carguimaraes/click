@@ -5,10 +5,7 @@ import org.springframework.http.ResponseEntity;
 
 public class NovoClickService implements INovoClickService {
 
-	public static String MSG_AD_ID_N_INFORMADO= "Ad_id não informado";
-	public static String MSG_ACCOUNT_ID_N_INFORMADO= "Account_id não informado";
-	public static String MSG_CPC_INVALIDO= "Cpc invalido";
-	
+ 
 	private NovoClickService() {}
 	
 	public static INovoClickService New()
