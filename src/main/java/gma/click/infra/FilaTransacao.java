@@ -17,12 +17,13 @@ import com.rabbitmq.client.DefaultConsumer;
 import com.rabbitmq.client.Envelope;
 
 import gma.click.domain.service.ISendTransacao;
+import gma.click.domain.service.TransacaoMensagem;
 
 @Component
 public class FilaTransacao implements ISendTransacao {
 
 	@Override
-	public boolean executar(String msg) throws Exception {
+	public boolean executar(TransacaoMensagem msg) throws Exception {
 		String QUEUE_NAME = "filaClick";
 
 		ConnectionFactory factory = new ConnectionFactory();

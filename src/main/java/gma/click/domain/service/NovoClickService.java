@@ -49,8 +49,10 @@ public class NovoClickService implements INovoClickService {
 		if(serviceResult.existeErro()) return serviceResult;
 		//TODO nao sera validado se id existe
 		
+		TransacaoMensagem tMsg= new TransacaoMensagem();
+		tMsg.msg=ad_id +"#"+account_id+"#"+ cpc;
 		//manda para a fila
-		_sendTransacao.executar("Teste GMA mensagem");
+		_sendTransacao.executar(tMsg);
 		
 		return serviceResult;
 	}
