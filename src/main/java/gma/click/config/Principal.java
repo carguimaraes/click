@@ -8,6 +8,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+import org.springframework.web.servlet.DispatcherServlet;
 
 //TODO package gma.click.domain.respository - RETIRAR DO SCAN... QUANDO REPOSITORIOS T IMP
 @EnableAutoConfiguration
@@ -26,9 +27,10 @@ public class Principal {
 	public static void main(String[] args) {
 		
 		System.out.println("APLICACAO INICIALIZADA");
-		SpringApplication.run(Principal.class,args);
+		//SpringApplication.run(Principal.class,args);
 		
-		//ApplicationContext apCtx= SpringApplication.run(Principal.class,args);
+		ApplicationContext apCtx= SpringApplication.run(Principal.class,args);
+		
 		
 		//ConfigurableApplicationContext c= (ConfigurableApplicationContext) apCtx;
 		

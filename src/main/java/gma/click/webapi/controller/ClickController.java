@@ -2,6 +2,7 @@ package gma.click.webapi.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
 
@@ -45,6 +46,12 @@ public class ClickController {
 	@Autowired
 	private INovoClickWebApiService _novoClickWebApiService; 
 	
+	@RequestMapping(path="*")
+	public ResponseEntity<?> naoEncontrado()
+	{
+		return     new ResponseEntity<List<String>>( Arrays.asList("Recurso não encontrado"),  HttpStatus.NOT_FOUND);
+	}
+	 
 	
 	//Content-Type: application/json; charset=UTF-8
 	@RequestMapping(method=RequestMethod.POST,path="/clicks")
