@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import gma.click.domain.entity.Click;
 import gma.click.domain.respository.IClickRepository;
 import gma.click.domain.service.INovoClickService;
 import gma.click.webapi.dto.ClickDto;
@@ -40,8 +41,15 @@ public class ConsultaClickWebApiService implements IConsultaClickWebApiService {
 			return new ResponseEntity<List<String>>( Arrays.asList(MSG_PRM_BUSCA_N_INFORMADO),  HttpStatus.BAD_REQUEST);
 		}
 		
+		//TODO colocar captura de erro e gerar erro 500
+		Click ck=_clickRepository.findByAdId(adId);
 		
-		ClickDto dto= new ClickDto("1","22",10F);
+		if(ck==null) {
+			return new ResponseEntity<List<String>>( Arrays.asList(MSG_INFO_N_ENCONTRADA),  HttpStatus.NOT_FOUND);
+		}
+		
+		
+		ClickDto dto= new ClickDto(ck.getAd_id(),ck.getAccount_id(),ck.getCpc());
 		
 		return  new ResponseEntity<ClickDto>(dto,  HttpStatus.OK);
 	}
