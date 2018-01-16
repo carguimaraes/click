@@ -1,6 +1,7 @@
 package testeintegracao.webapi.controller;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -50,7 +51,7 @@ public class ClickControllerTest {
     }
  
 
-
+    @Ignore
 	@Test
 	public void exampleTest() throws Exception {
 		

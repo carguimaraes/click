@@ -46,7 +46,7 @@ public class NovoClickWebApiServiceTest {
 	}
 	
 	@Test
-	public void novo_falha_parametroInvalido_retornaMensagemErro()
+	public void novo_falha_parametroInvalido_retornaMensagemErro() throws Exception
 	{
 		ClickDto clickDto= new ClickDto("","",0F);
 		ServiceResult rs= new ServiceResult();
@@ -70,9 +70,27 @@ public class NovoClickWebApiServiceTest {
 	    
 	}
 	 
+	@Test
+	public void novo_falhaErroInternoProcessamentoFila_retornaMsgErro() throws Exception
+	{
+		ClickDto clickDto= new ClickDto("1","1",10F);
+		ServiceResult rs= new ServiceResult();
+		
+		Mockito.
+			when(_novoClickServiceMock.novo(Mockito.anyString(),Mockito.anyString(),Mockito.anyFloat()))
+			.thenThrow(new Exception("ERRRO SERVIÇO"));
+		 
+		ResponseEntity<List<String>> ret=	(ResponseEntity<List<String>>) _novoClickWebApiService.novo(clickDto);
+		
+		assertEquals( HttpStatus.INTERNAL_SERVER_ERROR,  ret.getStatusCode());
+			 
+		 assertEquals( INovoClickWebApiService.MSG_ERRO_INTERNO_GERAR_TRANS,  ret.getBody().get(0));
+		
+	}
+	
 	
 	@Test
-	public void novo_sucesso_retornaOk()
+	public void novo_sucesso_retornaOk() throws Exception
 	{
 		ClickDto clickDto= new ClickDto("1","1",10F);
 		ServiceResult rs= new ServiceResult();
@@ -81,7 +99,7 @@ public class NovoClickWebApiServiceTest {
 			when(_novoClickServiceMock.novo(Mockito.anyString(),Mockito.anyString(),Mockito.anyFloat()))
 			.thenReturn(rs);
 		 
-		ResponseEntity<String> ret=	(ResponseEntity<String>) _novoClickWebApiService.novo(clickDto);
+		ResponseEntity<?> ret=	(ResponseEntity<?>) _novoClickWebApiService.novo(clickDto);
 		
 		assertEquals( HttpStatus.NO_CONTENT,  ret.getStatusCode());
 		

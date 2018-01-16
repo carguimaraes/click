@@ -50,10 +50,6 @@ public class NovoClickServiceTest {
 	{
 		ArgumentCaptor<TransacaoMensagem> msgCap=ArgumentCaptor.forClass(TransacaoMensagem.class);
 		
-		//Mockito.
-		//when(_sendTransacaoMock.executar( Mockito.anyString() )).thenReturn(true);
-		
-		
 		Mockito.
 		when(_sendTransacaoMock.executar( msgCap.capture() )).thenReturn(true);
 		
