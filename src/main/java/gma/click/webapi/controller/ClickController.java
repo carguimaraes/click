@@ -25,7 +25,10 @@ import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Consumer;
 import com.rabbitmq.client.DefaultConsumer;
 
+import gma.click.domain.entity.Click;
+import gma.click.domain.respository.IClickRepository;
 import gma.click.webapi.dto.ClickDto;
+import gma.click.webapi.service.INovoClickWebApiService;
 
 //http://192.168.1.113:8080/api/v1/clicks
 //http://localhost:8080/api/v1/clicks
@@ -34,10 +37,14 @@ import gma.click.webapi.dto.ClickDto;
 @RestController
 @RequestMapping("api/v1")
 public class ClickController {
-	
-	//@Autowired
-	//private IArquivoRepository _arquivoRepository;
 	 
+	
+	@Autowired
+	private  IClickRepository  _clickRepository;
+	 
+	@Autowired
+	private INovoClickWebApiService _novoClickWebApiService; 
+	
 	
 	@RequestMapping(method=RequestMethod.GET,path="/clicks",produces = "application/json")
 	public ResponseEntity<?> getListClick()
@@ -56,17 +63,20 @@ public class ClickController {
 	
 	//Content-Type: application/json; charset=UTF-8
 	@RequestMapping(method=RequestMethod.POST,path="/clicks")
-	public ResponseEntity<?> newClick(@RequestBody ClickDto clickDto)
+	public ResponseEntity<?> novoClick(@RequestBody ClickDto clickDto)
 	{
 	 	
-		return   new ResponseEntity<List<ClickDto>>(  HttpStatus.NO_CONTENT);
+		return   _novoClickWebApiService.novo(clickDto);
 	}
 	
 	@RequestMapping(method=RequestMethod.GET,path="/clicks/{id}",produces = "application/json")
 	public ResponseEntity<?> getClick(@PathVariable("id") long id)
 	{
-	 	
-		return   new ResponseEntity<ClickDto>(new ClickDto("21","3",0.2F),  HttpStatus.OK);
+	 
+	 Click ck=	  _clickRepository.getById("1967");
+	 ClickDto dto= new ClickDto(ck.getAd_id(),ck.getAccount_id(),ck.getCpc());	
+		
+		return   new ResponseEntity<ClickDto>(dto	,  HttpStatus.OK);
 	}
 	
 

@@ -15,13 +15,13 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 //@SpringBootApplication
 
 @EnableAutoConfiguration
-//@EnableJpaRepositories("gma.click.model")
-@EnableMongoRepositories(basePackages = "gma.click.model")
+//@EnableJpaRepositories("gma.click.domain.repository")
+@EnableMongoRepositories(basePackages = "gma.click.domain.repository")
+@EntityScan("gma.click.domain.entity")
 @ComponentScan({"gma.click.webapi.controller",
-	            "gma.click.model",
 	            "gma.click.config"
 	            })
-@EntityScan("gma.click.model")
+
 public class Principal {
 
 	public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package gma.click.model;
+package gma.click.domain.respository;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
