@@ -9,7 +9,7 @@ import gma.click.webapi.dto.ClickDto;
 public class ClickRepositoryImp implements IClickRepository {
 
 	@Override
-	public Click getById(String id) {
+	public Click findByAdId(String adId) {
 		
 		Click ck= new Click();
 		

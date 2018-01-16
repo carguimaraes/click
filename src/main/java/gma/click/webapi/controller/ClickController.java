@@ -28,6 +28,7 @@ import com.rabbitmq.client.DefaultConsumer;
 import gma.click.domain.entity.Click;
 import gma.click.domain.respository.IClickRepository;
 import gma.click.webapi.dto.ClickDto;
+import gma.click.webapi.service.IConsultaClickWebApiService;
 import gma.click.webapi.service.INovoClickWebApiService;
 
 //http://192.168.1.113:8080/api/v1/clicks
@@ -38,28 +39,12 @@ import gma.click.webapi.service.INovoClickWebApiService;
 @RequestMapping("api/v1")
 public class ClickController {
 	 
-	
 	@Autowired
-	private  IClickRepository  _clickRepository;
+	private IConsultaClickWebApiService _consultaClickWebApiService;
 	 
 	@Autowired
 	private INovoClickWebApiService _novoClickWebApiService; 
 	
-	
-	@RequestMapping(method=RequestMethod.GET,path="/clicks",produces = "application/json")
-	public ResponseEntity<?> getListClick()
-	{
-		
-		List<ClickDto> listClick= new ArrayList<>();
-		
-	
-		for(int i=1;i<=10;i++)
-		{
-			listClick.add(new ClickDto("2"+i,"3"+i,0.2F));	
-		}
-		
-		return   new ResponseEntity<List<ClickDto>>( listClick, HttpStatus.OK);
-	}
 	
 	//Content-Type: application/json; charset=UTF-8
 	@RequestMapping(method=RequestMethod.POST,path="/clicks")
@@ -69,14 +54,13 @@ public class ClickController {
 		return   _novoClickWebApiService.novo(clickDto);
 	}
 	
-	@RequestMapping(method=RequestMethod.GET,path="/clicks/{id}",produces = "application/json")
-	public ResponseEntity<?> getClick(@PathVariable("id") long id)
+	//TODO id = String - seguindo documentação da prova de conceito - ideal e ser long ou int
+	@RequestMapping(method=RequestMethod.GET,path="/clicks/{adId}",produces = "application/json")
+	public ResponseEntity<?> getClick(@PathVariable("adId") String adId)
 	{
 	 
-	 Click ck=	  _clickRepository.getById("1967");
-	 ClickDto dto= new ClickDto(ck.getAd_id(),ck.getAccount_id(),ck.getCpc());	
-		
-		return   new ResponseEntity<ClickDto>(dto	,  HttpStatus.OK);
+	 	
+		return   _consultaClickWebApiService.buscarPorAdId(adId);
 	}
 	
 

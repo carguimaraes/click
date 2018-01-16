@@ -4,6 +4,6 @@ import gma.click.domain.entity.Click;
 
 public interface IClickRepository {
 	
-	public Click getById(String id);
+	public Click findByAdId(String adId);
 
 }
