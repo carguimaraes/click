@@ -22,6 +22,9 @@ public class NovoClickWebApiService implements INovoClickWebApiService {
 		return new NovoClickWebApiService();
 	}
 
+	//Observação estou usando os Ids como string obedecendo o modelo, mas o idel é long ou int
+	
+	
 	@Override
 	public ResponseEntity<?> novo(ClickDto clickDto) {
 	 
@@ -33,11 +36,11 @@ public class NovoClickWebApiService implements INovoClickWebApiService {
 		 	
 			return new ResponseEntity<String>(MSG_INFO_N_PODE_SER_NULL,  HttpStatus.BAD_REQUEST);
 		}
-		if(clickDto.getAd_id()==null || clickDto.getAd_id().isEmpty())
+		if(clickDto.getAd_id()==null || clickDto.getAd_id().trim().isEmpty())
 		{
 			return new ResponseEntity<String>(MSG_AD_ID_N_INFORMADO,  HttpStatus.BAD_REQUEST);
 		}
-		if(clickDto.getAccount_id() ==null || clickDto.getAccount_id().isEmpty())
+		if(clickDto.getAccount_id() ==null || clickDto.getAccount_id().trim().isEmpty())
 		{
 			return new ResponseEntity<String>(MSG_ACCOUNT_ID_N_INFORMADO,  HttpStatus.BAD_REQUEST);
 		}
