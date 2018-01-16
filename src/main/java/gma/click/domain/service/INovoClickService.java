@@ -7,5 +7,5 @@ public interface INovoClickService {
 	public static String MSG_CPC_INVALIDO= "Cpc invalido";
 	
 	
-	public ServiceResult novo(String ad_id, String account_id, float cpc);
+	public ServiceResult novo(String ad_id, String account_id, float cpc) throws Exception;
 }

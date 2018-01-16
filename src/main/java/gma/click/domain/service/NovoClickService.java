@@ -1,5 +1,6 @@
 package gma.click.domain.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -8,16 +9,24 @@ import org.springframework.stereotype.Service;
 public class NovoClickService implements INovoClickService {
 
  
+	private ISendTransacao _sendTransacao;
+	
 	private NovoClickService() {}
 	
-	public static INovoClickService New()
+	@Autowired
+	private NovoClickService(ISendTransacao sendTransacao) {
+		
+		_sendTransacao=sendTransacao;
+	}
+	
+	public static INovoClickService New(ISendTransacao sendTransacao)
 	{
-		return new  NovoClickService();
+		return new  NovoClickService(sendTransacao);
 	}
 	
 	
 	@Override
-	public ServiceResult novo(String ad_id, String account_id, float cpc) {
+	public ServiceResult novo(String ad_id, String account_id, float cpc) throws Exception {
 		
 		ServiceResult serviceResult= new ServiceResult();
 		 
@@ -35,6 +44,13 @@ public class NovoClickService implements INovoClickService {
 		{
 			serviceResult.add(MSG_CPC_INVALIDO);
 		}
+		
+		
+		if(serviceResult.existeErro()) return serviceResult;
+		//TODO nao sera validado se id existe
+		
+		//manda para a fila
+		_sendTransacao.executar("Teste GMA mensagem");
 		
 		return serviceResult;
 	}

@@ -36,6 +36,7 @@ public class NovoClickWebApiService implements INovoClickWebApiService {
 	@Override
 	public ResponseEntity<?> novo(ClickDto clickDto) {
 	 
+		
 		//validação inicial
 		// no serviço que processa a validação pode ser feita a validação
 		//existencia cliente, etc
@@ -47,10 +48,19 @@ public class NovoClickWebApiService implements INovoClickWebApiService {
 		 
 		
 		//TODO colocar try capturar erro quando colocar repositorio mongo e transacao
-		 ServiceResult rs=_novoClickService.novo(clickDto.getAd_id(), clickDto.getAccount_id(), clickDto.getCpc());
 		
-		 if(rs.existeErro()) return new ResponseEntity<>( rs.getListaMsg(),  HttpStatus.BAD_REQUEST);
 		 
+		try {
+			
+			 ServiceResult rs = _novoClickService.novo(clickDto.getAd_id(), clickDto.getAccount_id(), clickDto.getCpc());
+			
+			if(rs.existeErro()) return new ResponseEntity<List<String>>( rs.getListaMsg(),  HttpStatus.BAD_REQUEST);
+			
+		} catch (Exception e) {
+			 
+		   //TODO  IDEAL COLOCAR ERRO COMPLETO NO LOG DA APLICAÇÃO	
+		   return	new ResponseEntity<List<String>>( Arrays.asList(MSG_ERRO_INTERNO_GERAR_TRANS),  HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 		 
 		 
 		 
