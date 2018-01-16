@@ -9,17 +9,16 @@ import org.springframework.context.annotation.ComponentScan;
 
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
-//
-//br.com.gma.controller,   //basePackages= 
-//@EnableTransactionManagement
-//@SpringBootApplication
-
+//TODO package gma.click.domain.respository - RETIRAR DO SCAN... QUANDO REPOSITORIOS T IMP
 @EnableAutoConfiguration
-//@EnableJpaRepositories("gma.click.domain.repository")
 @EnableMongoRepositories(basePackages = "gma.click.domain.repository")
 @EntityScan("gma.click.domain.entity")
-@ComponentScan({"gma.click.webapi.controller",
-	            "gma.click.config"
+@ComponentScan({"gma.click.config",
+	 			"gma.click.domain.respository",
+	 			"gma.click.domain.service",
+	            "gma.click.webapi.controller",
+	            "gma.click.webapi.service"
+	            
 	            })
 
 public class Principal {

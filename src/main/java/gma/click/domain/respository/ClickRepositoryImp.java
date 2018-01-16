@@ -11,6 +11,11 @@ public class ClickRepositoryImp implements IClickRepository {
 	@Override
 	public Click findByAdId(String adId) {
 		
+		if(!adId.equals("1967")) {
+			return null;
+		}
+			
+		
 		Click ck= new Click();
 		
 		ck.setAccount_id("2221");
