@@ -1,7 +1,12 @@
 package gma.click.domain.entity;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "click")
 public class Click {
 
+	@Id
 	private String ad_id;
 	private String account_id;
 	private float cpc;
