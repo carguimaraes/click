@@ -5,7 +5,10 @@ package testeintegracao.webapi.controller;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
 
+import gma.click.config.Principal;
 import gma.click.domain.entity.Click;
 import gma.click.webapi.dto.ClickDto;
 
@@ -14,11 +17,15 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Response;
 
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
 import static org.hamcrest.Matchers.*;
 
 
-//@RunWith(SpringRunner.class)
-//@SpringBootTest(classes = Principal.class)
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = Principal.class)
 public class ClickControllerTest {
 	
 	
@@ -52,6 +59,7 @@ public class ClickControllerTest {
     		  Object  r= target.path("/api/v1/clicks/196799").request().get(Object.class);
     	   } catch (Exception e) {
     	 
+    		   System.out.println("erro GMA");
     		   System.out.println(e.getMessage());
     		    
     	

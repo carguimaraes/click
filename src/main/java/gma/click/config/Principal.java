@@ -15,8 +15,8 @@ import org.springframework.web.servlet.DispatcherServlet;
 @EnableMongoRepositories(basePackages = "gma.click.domain.repository")
 @EntityScan("gma.click.domain.entity")
 @ComponentScan({"gma.click.config",
-	            "gma.click.infra",  
-	 			"gma.click.domain.respository",
+	            "gma.click.infra", 
+	            "gma.click.domain.repository",
 	 			"gma.click.domain.service",
 	            "gma.click.webapi.controller",
 	            "gma.click.webapi.service"

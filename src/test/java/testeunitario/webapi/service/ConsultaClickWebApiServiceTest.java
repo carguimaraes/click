@@ -15,7 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import gma.click.domain.entity.Click;
-import gma.click.domain.respository.IClickRepository;
+import gma.click.domain.repository.IClickRepository;
 import gma.click.webapi.dto.ClickDto;
 import gma.click.webapi.service.ConsultaClickWebApiService;
 import gma.click.webapi.service.IConsultaClickWebApiService;

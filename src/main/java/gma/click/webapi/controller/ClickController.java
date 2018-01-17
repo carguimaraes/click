@@ -27,7 +27,7 @@ import com.rabbitmq.client.Consumer;
 import com.rabbitmq.client.DefaultConsumer;
 
 import gma.click.domain.entity.Click;
-import gma.click.domain.respository.IClickRepository;
+import gma.click.domain.repository.IClickRepository;
 import gma.click.webapi.dto.ClickDto;
 import gma.click.webapi.service.IConsultaClickWebApiService;
 import gma.click.webapi.service.INovoClickWebApiService;
