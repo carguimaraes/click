@@ -45,6 +45,7 @@ public class ClickControllerTest {
    // }
  
 
+	@Ignore
     @Test
     public void x()
     {
@@ -52,8 +53,12 @@ public class ClickControllerTest {
     	  
     	  WebTarget target = client.target("http://localhost:8080");
     	  
-    ///	  ClickDto dto = target.path("/api/v1/clicks/19673").request().get(ClickDto.class);
+    	  ClickDto dto = target.path("/api/v1/clicks/1967").request().get(ClickDto.class);
     	  
+    	   System.out.println("GMA DTO:"+dto.getAccount_id());
+    	
+    	  //TESTE nao encontrado
+    	  /*
     	  try {
     		
     		  Object  r= target.path("/api/v1/clicks/196799").request().get(Object.class);
@@ -68,7 +73,7 @@ public class ClickControllerTest {
     	 
     	// String[] ss= (String[] )  r.getEntity();
     	 
-    	 
+    	 */
     	 
     	 
     	 
