@@ -1,4 +1,4 @@
-package testeintegracao.webapi.domain.repository;
+package testeintegracao.domain.repository;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -19,7 +19,7 @@ public class ClickRepositoryTest {
 	@Autowired
 	private IClickRepository  _clickRepository;
 	
-	@Ignore
+	@Ignore(value="usado para teste manual - comentar o ignore para executar o teste")
 	@Test
 	public void sava_inclusao()
 	{
@@ -32,7 +32,7 @@ public class ClickRepositoryTest {
 		
 	}
 	
-	@Ignore
+	@Ignore(value="usado para teste manual - comentar o ignore para executar o teste")
 	@Test
 	public void findByAdId()
 	{
@@ -41,6 +41,8 @@ public class ClickRepositoryTest {
 		System.out.println("Buscando...");
 			
 		ck=_clickRepository.findByAdId("19676");
+		
+		
 	
 		if(ck!=null)
 		{

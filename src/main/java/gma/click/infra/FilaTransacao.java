@@ -21,24 +21,36 @@ import gma.click.domain.service.TransacaoMensagem;
 
 @Component
 public class FilaTransacao implements ISendTransacao {
+	
+	private FilaTransacao() {}
+	
+	private static ISendTransacao New() {
+		return new FilaTransacao();
+	}
+	
 
 	@Override
 	public boolean executar(TransacaoMensagem msg) throws Exception {
-		String QUEUE_NAME = "filaClick";
+		
+		
+		String fileNome = "filaClick";
+		String  filaUsername="admin";
+		String filaSenha="123";
+		String filaHost="192.168.1.113";
 
 		ConnectionFactory factory = new ConnectionFactory();
 
-		factory.setUsername("admin");
-		factory.setPassword("123");
+		factory.setUsername(filaUsername);
+		factory.setPassword(filaSenha);
 		// factory.setVirtualHost(virtualHost);
 
-		factory.setHost("192.168.1.113");
+		factory.setHost(filaHost);
 		Connection connection = factory.newConnection();
 		Channel channel = connection.createChannel();
 
-		channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+		channel.queueDeclare(fileNome, false, false, false, null);
 		String message = "Ola Vida Boa";
-		channel.basicPublish("", QUEUE_NAME, null, message.getBytes());
+		channel.basicPublish("", fileNome, null, message.getBytes());
 
 		channel.close();
 		connection.close();

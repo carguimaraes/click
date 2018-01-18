@@ -45,7 +45,7 @@ public class ClickControllerTest {
    // }
  
 
-	@Ignore
+	@Ignore(value="usado para teste manual - comentar o ignore para executar o teste")
     @Test
     public void x()
     {
@@ -83,7 +83,7 @@ public class ClickControllerTest {
     }
     
     
-    @Ignore
+    @Ignore(value="usado para teste manual - comentar o ignore para executar o teste")
 	@Test
 	public void exampleTest() throws Exception {
 		
