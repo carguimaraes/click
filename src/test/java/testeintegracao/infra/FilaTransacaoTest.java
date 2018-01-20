@@ -9,6 +9,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import gma.click.config.Principal;
 import gma.click.domain.service.ISendTransacao;
+import gma.click.domain.service.TransacaoMensagem;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Principal.class)
@@ -19,8 +20,20 @@ public class FilaTransacaoTest {
 	
 	@Ignore(value="usado para teste manual - comentar o ignore para executar o teste")
 	@Test
-	public void send()
+	public void send()  
 	{
+		TransacaoMensagem tm= new TransacaoMensagem();
+		
+		tm.msg="GMA TESTE MENSAGEM SABADO";
+		
+		try {
+			System.out.println("Inicio envio msg");
+			_sendTransacao.executar(tm);
+			System.out.println("fim");
+		} catch (Exception e) {
+			 
+			e.printStackTrace();
+		}
 		
 	}
 

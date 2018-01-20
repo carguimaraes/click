@@ -3,6 +3,8 @@ package gma.click.infra;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 import com.rabbitmq.client.ConnectionFactory;
@@ -22,6 +24,10 @@ import gma.click.domain.service.TransacaoMensagem;
 @Component
 public class FilaTransacao implements ISendTransacao {
 	
+	
+	@Autowired
+	private Environment _env;
+	
 	private FilaTransacao() {}
 	
 	private static ISendTransacao New() {
@@ -33,10 +39,11 @@ public class FilaTransacao implements ISendTransacao {
 	public boolean executar(TransacaoMensagem msg) throws Exception {
 		
 		
-		String fileNome = "filaClick";
-		String  filaUsername="admin";
-		String filaSenha="123";
-		String filaHost="192.168.1.113";
+		//TODO colocar teste para verificar propriedades iniciadas com valor
+		String fileNome = _env.getProperty("file.nome");
+		String  filaUsername=_env.getProperty("fila.username");
+		String filaSenha=_env.getProperty("fila.senha");
+		String filaHost=_env.getProperty("fila.host");
 
 		ConnectionFactory factory = new ConnectionFactory();
 
@@ -49,7 +56,7 @@ public class FilaTransacao implements ISendTransacao {
 		Channel channel = connection.createChannel();
 
 		channel.queueDeclare(fileNome, false, false, false, null);
-		String message = "Ola Vida Boa";
+		String message = msg.toString();
 		channel.basicPublish("", fileNome, null, message.getBytes());
 
 		channel.close();
