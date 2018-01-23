@@ -35,7 +35,7 @@ public class ApplicationPropertiesTest {
 	public void filaValores()
 	{
  		
-		System.out.println("file.nome --> "+_env.getProperty("file.nome"));
+		System.out.println("file.nome --> "+_env.getProperty("fila.nome"));
 		System.out.println("fila.username --> "+_env.getProperty("fila.username"));
 		System.out.println("fila.senha --> "+_env.getProperty("fila.senha"));
 		System.out.println("fila.host --> "+_env.getProperty("fila.host"));

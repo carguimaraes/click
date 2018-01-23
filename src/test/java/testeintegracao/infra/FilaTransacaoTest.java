@@ -24,7 +24,7 @@ public class FilaTransacaoTest {
 	{
 		TransacaoMensagem tm= new TransacaoMensagem();
 		
-		tm.msg="GMA TESTE MENSAGEM SABADO";
+		tm.msg="GMA TESTE 222222 - 19:40h";
 		
 		try {
 			System.out.println("Inicio envio msg");

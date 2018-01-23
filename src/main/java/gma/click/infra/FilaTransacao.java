@@ -3,6 +3,8 @@ package gma.click.infra;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
@@ -20,6 +22,7 @@ import com.rabbitmq.client.Envelope;
 
 import gma.click.domain.service.ISendTransacao;
 import gma.click.domain.service.TransacaoMensagem;
+import testeintegracao.infra.CustomMessage;
 
 @Component
 public class FilaTransacao implements ISendTransacao {
@@ -28,19 +31,37 @@ public class FilaTransacao implements ISendTransacao {
 	@Autowired
 	private Environment _env;
 	
+	@Autowired
+	private RabbitTemplate _rabbitTemplate ;
+	
+	
 	private FilaTransacao() {}
 	
 	private static ISendTransacao New() {
 		return new FilaTransacao();
 	}
 	
-
+	
 	@Override
-	public boolean executar(TransacaoMensagem msg) throws Exception {
+	public boolean executar(TransacaoMensagem msg) throws Exception{
+		
+	
+		 //_rabbitTemplate.convertAndSend(new CustomMessage(2017001, "VALOR TESTE 02"));
+		 
+		 _rabbitTemplate.convertAndSend("VALOR TESTE 02");
+		 
+		
+		return true;
+	}
+	
+	
+
+	//@Override
+	public boolean ___executar(TransacaoMensagem msg) throws Exception {
 		
 		
 		//TODO colocar teste para verificar propriedades iniciadas com valor
-		String fileNome = _env.getProperty("file.nome");
+		String filaNome = _env.getProperty("fila.nome");
 		String  filaUsername=_env.getProperty("fila.username");
 		String filaSenha=_env.getProperty("fila.senha");
 		String filaHost=_env.getProperty("fila.host");
@@ -49,15 +70,14 @@ public class FilaTransacao implements ISendTransacao {
 
 		factory.setUsername(filaUsername);
 		factory.setPassword(filaSenha);
-		// factory.setVirtualHost(virtualHost);
-
 		factory.setHost(filaHost);
+		
 		Connection connection = factory.newConnection();
 		Channel channel = connection.createChannel();
 
-		channel.queueDeclare(fileNome, false, false, false, null);
+		channel.queueDeclare(filaNome, false, false, false, null);
 		String message = msg.toString();
-		channel.basicPublish("", fileNome, null, message.getBytes());
+		channel.basicPublish("", filaNome, null, message.getBytes());
 
 		channel.close();
 		connection.close();
