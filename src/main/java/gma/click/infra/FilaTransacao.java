@@ -22,7 +22,6 @@ import com.rabbitmq.client.Envelope;
 
 import gma.click.domain.service.ISendTransacao;
 import gma.click.domain.service.TransacaoMensagem;
-import testeintegracao.infra.CustomMessage;
 
 @Component
 public class FilaTransacao implements ISendTransacao {
@@ -46,9 +45,10 @@ public class FilaTransacao implements ISendTransacao {
 	public boolean executar(TransacaoMensagem msg) throws Exception{
 		
 	
-		 //_rabbitTemplate.convertAndSend(new CustomMessage(2017001, "VALOR TESTE 02"));
+		_rabbitTemplate.convertAndSend(new CustomMessage(2017001, "VALOR TESTE 0233333"));
 		 
-		 _rabbitTemplate.convertAndSend("VALOR TESTE 02");
+	//	_rabbitTemplate.convertAndSend((new CustomMessage(2017001, "VALOR TESTE 03")).toString());
+		// _rabbitTemplate.convertAndSend("VALOR TESTE 02");
 		 
 		
 		return true;

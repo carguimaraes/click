@@ -58,7 +58,8 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-amqp</artifactId>
 		</dependency>
-		<!--  GMA verificar 
+		<!--  USADO NO MessageConverter jsonMessageConverter() - FILA
+		  como o uso Jackson2JsonMessageConverter() nao é necessario usar esta dependencia
 		  <dependency>
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-mapper-asl</artifactId>

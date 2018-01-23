@@ -1,10 +1,13 @@
-package testeintegracao.infra;
+package gma.click.infra;
 
 public class CustomMessage {
 	
 	 private int id;
 	    private String name;
 
+	    public CustomMessage() {}
+
+	    
 	    public CustomMessage(int id, String name) {
 	        this.id = id;
 	        this.name = name;

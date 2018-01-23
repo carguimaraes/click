@@ -1,23 +1,23 @@
 package gma.click.config;
 
 import org.springframework.amqp.core.AcknowledgeMode;
+import org.springframework.amqp.core.MessageListener;
 import org.springframework.amqp.core.Queue;
-import org.springframework.amqp.rabbit.annotation.EnableRabbit;
+
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
-import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
+
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
-import org.springframework.amqp.support.converter.JsonMessageConverter;
+
 import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
-import org.springframework.scheduling.annotation.EnableScheduling;
 
-import testeintegracao.infra.ConsomeFila;
+import gma.click.infra.ConsomeFila;
 
 @Configuration
 public class RabbitMqConfig {
@@ -25,6 +25,9 @@ public class RabbitMqConfig {
 	
 	@Autowired
 	private Environment _env;
+	
+	@Autowired
+	private MessageListener _messageListener;
 	
 	
 
@@ -50,10 +53,12 @@ public class RabbitMqConfig {
 		return new Queue(fileNome);
 	}
 
-	//@Bean
-	//public MessageConverter jsonMessageConverter() {
-	//	return  new JsonMessageConverter();
-	//}
+	
+	//TODO PARA USO FUTURO
+	@Bean
+	public MessageConverter jsonMessageConverter() {
+		return  new   Jackson2JsonMessageConverter(); // new JsonMessageConverter();
+	}
 
 	
 	@Bean
@@ -62,7 +67,10 @@ public class RabbitMqConfig {
 		
 		RabbitTemplate template = new RabbitTemplate(connectionFactory());
 		template.setRoutingKey(filaNome);
-		////template.setMessageConverter(jsonMessageConverter());
+		
+		 
+		//TODO PARA USO FUTURO
+		template.setMessageConverter(jsonMessageConverter());
 		return template;
 	}
 
@@ -74,8 +82,9 @@ public class RabbitMqConfig {
 		SimpleMessageListenerContainer listenerContainer = new SimpleMessageListenerContainer();
 		listenerContainer.setConnectionFactory(connectionFactory());
 		listenerContainer.setQueues(simpleQueue());
-		//listenerContainer.setMessageConverter(jsonMessageConverter());
-		listenerContainer.setMessageListener(new ConsomeFila());
+		//TODO PARA USO FUTURO
+		listenerContainer.setMessageConverter(jsonMessageConverter());
+		listenerContainer.setMessageListener(_messageListener); //   new ConsomeFila(jsonMessageConverter()));
 		listenerContainer.setAcknowledgeMode(AcknowledgeMode.AUTO);
 		return listenerContainer;
 	}
